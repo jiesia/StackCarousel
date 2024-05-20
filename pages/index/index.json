@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "stack-carousel": "../../components/stack-carousel/index"
+  }
+}

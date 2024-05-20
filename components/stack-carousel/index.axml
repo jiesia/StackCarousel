@@ -1,0 +1,39 @@
+<import-sjs name="sjs" from="./index.sjs" />
+
+<view class="wrapper">
+  <view class="swiper-container">
+    <scroll-view
+      class="swiper-wrapper"
+      scroll-x
+      data-total="{{ dataList.length - 1 }}"
+      data-windowWidth="{{ windowWidth }}"
+      onScroll="{{ sjs.handleScrollEvent }}"
+      scroll-left="{{ scrollLeft }}"
+      onTouchMove="{{ sjs.handleTouchMoveEvent }}"
+      style="scroll-behavior: {{ disableProgrammaticAnimation ? 'auto' : 'smooth'}};"
+    >
+      <!-- 信息流展示卡片 -->
+      <view class="swiper-view-wrapper">
+        <view
+          a:for="{{ dataList }}"
+          a:for-item="data"
+          class="swiper-view"
+          key="{{ data.id }}"
+          style="{{ sjs.getItemStyle(windowWidth, index) }}"
+        >
+          <view
+            class="swiper-view-item {{ index === 0 ? 'swiper-view-item_first' : '' }}"
+            style="
+            background-image: url({{ data.image }});
+            width: {{ index === 0 ? 394 : index === dataList.length - 1 ? 465 : 314 }}rpx;
+            {{ index === dataList.length - 1 ? 'position: absolute; right: 420rpx;' : '' }}
+          "
+          >
+          </view>
+        </view>
+      </view>
+      <!-- 尾部有一张兜底图 -->
+      <view a:for="{{ dataList.length - 1 }}" onTap="onClickCard" class="swiper-slide" />
+    </scroll-view>
+  </view>
+</view>
